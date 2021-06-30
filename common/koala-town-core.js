@@ -330,7 +330,7 @@ function updatePlayerState(player, deltaTime) {
       newPlayer.walkDirection = DIR.LEFT;
     }
     else if (dY > 0 && !dXBigger) {
-      newPlayer.walkDirection = DIR.FORWAD;
+      newPlayer.walkDirection = DIR.FORWARD;
     }
     else if (dY < 0 && !dXBigger) {
       newPlayer.walkDirection = DIR.BACKWARD;
