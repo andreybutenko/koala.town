@@ -1,6 +1,11 @@
 const CANVAS_FONT_SIZE = 16;
 const ANIMATION_ALT_TIME = 0.08;
 
+// Redirect to homepage if accessed webpage directly
+if (!document.referrer.includes('localhost') && !document.referrer.includes('koala.town')) {
+  window.location.replace('/');
+}
+
 let gameState = {
   players: [],
 };
