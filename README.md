@@ -1,4 +1,6 @@
-# koala.town
+# [Play koala.town!](https://koala.town/)
+
+Koala Town is a small, fun place for koala lovers to hang out!
 
 ## Running locally
 
