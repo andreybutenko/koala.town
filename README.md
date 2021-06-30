@@ -2,6 +2,8 @@
 
 Koala Town is a small, fun place for koala lovers to hang out!
 
+["Club Koala"](https://github.com/andreybutenko/club-koala) was originally built as part of CSE 154: Web Programming at the University of Washington in April 2019. Koala Town was re-written using Node and Socket.io (instead of PHP) in July 2021.
+
 ## Running locally
 
 ```
@@ -27,5 +29,5 @@ docker pull andreybutenko/koala.town
 
 docker rm -f koala.town
 
-docker run -p 3000:3000 --name koala.town -d andreybutenko/koala.cat /etc/centos-releasetown
+docker run -p 3000:3000 --name koala.town -d andreybutenko/koala.town
 ```
