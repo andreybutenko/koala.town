@@ -9,9 +9,9 @@ window.addEventListener('load', function() {
   const core = window.core;
 
   const sprites = new Image();
-  sprites.src = '/spritesheet.png'
+  sprites.src = '/static/images/spritesheet.png'
   const background = new Image();
-  background.src = '/scene.png';
+  background.src = '/static/images/scene.png';
 
   let canvas;
   let ctx;

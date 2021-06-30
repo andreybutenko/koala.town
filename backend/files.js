@@ -3,14 +3,7 @@ const path = require('path');
 const FILES = {
   '/': '../frontend/index.html',
   '/play': '../frontend/play.html',
-
-  '/scene.png': '../frontend/images/scene.png',
-  '/spritesheet.png': '../frontend/images/spritesheet.png',
-
   '/core.js': '../common/koala-town-core.js',
-  '/interactions.js': '../frontend/interactions.js',
-
-  '/styles.css': '../frontend/styles.css',
 };
 
 module.exports = {
@@ -20,5 +13,7 @@ module.exports = {
         res.sendFile(path.resolve(file));
       });
     });
+
+    app.use('/static', express.static('../frontend/static'))
   },
 }
