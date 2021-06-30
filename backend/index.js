@@ -9,7 +9,7 @@ const io = new Server(server);
 const { setupFiles } = require('./files.js');
 const { setupSockets } = require('./sockets.js');
 
-setupFiles(app);
+setupFiles(app, express);
 setupSockets(io);
 
 server.listen(3000, () => {

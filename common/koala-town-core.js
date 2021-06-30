@@ -6,7 +6,16 @@ const DANCE = {
   CHEER: 'Cheer Leader',
   WAVE: 'Wave',
   SLEEP: 'Sleep',
-}
+};
+
+/** Map of dances to location in sprite sheet */
+const DANCE_TO_SPRITE_MAP = {
+  [DANCE.VERY_HAPPY]: 0,
+  [DANCE.DAB]: 1,
+  [DANCE.CHEER]: 2,
+  [DANCE.WAVE]: 3,
+  [DANCE.SLEEP]: 4,
+};
 
 /** Enum of possible directions of player sprite */
 const DIR = {
@@ -28,6 +37,7 @@ const DIR_TO_SPRITE_MAP = {
 
 /** Events that can be emitted or processed */
 const EVENT = {
+  SYNC: 'sync',
   ADD_PLAYER: 'add player',
   REMOVE_PLAYER: 'remove player',
   SET_TARGET: 'set target',
@@ -214,7 +224,7 @@ function removePlayer(name, gameState) {
     throw `Player with name ${name} is not logged in`;
   }
   const newGameState = clone(gameState);
-  newGameState.players.splice(index, 1);
+  newGameState.players.splice(nameIndex, 1);
   return newGameState;
 }
 
@@ -314,16 +324,16 @@ function updatePlayerState(player, deltaTime) {
     const dXBigger = Math.abs(dX) >= Math.abs(dY);
 
     if (dX > 0 && dXBigger) {
-      player.walkDirection = DIR_RIGHT;
+      newPlayer.walkDirection = DIR.RIGHT;
     }
     else if (dX < 0 && dXBigger) {
-      player.walkDirection = DIR_LEFT;
+      newPlayer.walkDirection = DIR.LEFT;
     }
     else if (dY > 0 && !dXBigger) {
-      player.walkDirection = DIR_FORWARD;
+      newPlayer.walkDirection = DIR.FORWAD;
     }
     else if (dY < 0 && !dXBigger) {
-      player.walkDirection = DIR_BACKWARD;
+      newPlayer.walkDirection = DIR.BACKWARD;
     }
   }
   else {
@@ -359,6 +369,8 @@ function updatePlayerState(player, deltaTime) {
  */
 function processEvent(eventName, eventData, gameState) {
   switch(eventName) {
+    case EVENT.SYNC:
+      return eventData;
     case EVENT.ADD_PLAYER:
       return addPlayer(eventData.name, gameState);
     case EVENT.REMOVE_PLAYER:
@@ -370,10 +382,12 @@ function processEvent(eventName, eventData, gameState) {
     case EVENT.SET_DANCE:
       return setDance(eventData.name, eventData.dance, gameState);
   }
+  return gameState;
 }
 
-module.exports = {
+const coreExports = {
   DANCE,
+  DANCE_TO_SPRITE_MAP,
   DIR,
   DIR_TO_SPRITE_MAP,
   EVENT,
@@ -399,3 +413,12 @@ module.exports = {
   updatePlayerState,
   processEvent,
 };
+
+if (typeof module !== 'undefined') {
+  // node export
+  module.exports = coreExports;
+}
+else {
+  // browser export
+  window.core = coreExports;
+}
