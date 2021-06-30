@@ -1,11 +1,11 @@
 /** Enum of possible dances for player sprite */
 const DANCE = {
   NONE: 'NONE',
-  VERY_HAPPY: 'VERY_HAPPY',
-  DAB: 'DAB',
-  CHEER: 'CHEER',
-  WAVE: 'WAVE',
-  SLEEP: 'SLEEP',
+  VERY_HAPPY: 'Very Happy',
+  DAB: 'Dab',
+  CHEER: 'Cheer Leader',
+  WAVE: 'Wave',
+  SLEEP: 'Sleep',
 }
 
 /** Enum of possible directions of player sprite */
@@ -24,6 +24,15 @@ const DIR_TO_SPRITE_MAP = {
   [DIR.RIGHT]: 2,
   [DIR.FORWARD]: 3,
   [DIR.BACKWARD]: 4,
+};
+
+/** Events that can be emitted or processed */
+const EVENT = {
+  ADD_PLAYER: 'add player',
+  REMOVE_PLAYER: 'remove player',
+  SET_TARGET: 'set target',
+  SEND_CHAT: 'send chat',
+  SET_DANCE: 'set dance',
 };
 
 /** Time for a chat message to be dismissed (seconds) */
@@ -259,7 +268,7 @@ function sendChatMessage(name, message, gameState) {
  * @param {GameState} gameState Current game state
  * @returns {GameState} Updated game state
  */
-function sendChatMessage(name, dance, gameState) {
+function setDance(name, dance, gameState) {
   if (!isCurrentPlayer(name, gameState)) {
     throw `Player with name ${name} is not logged in`;
   }
@@ -340,3 +349,53 @@ function updatePlayerState(player, deltaTime) {
 
   return newPlayer;
 }
+
+/**
+ * Update game state according to updated event
+ * @param {String} eventName Event name
+ * @param {Object} eventData Event data
+ * @param {GameState} gameState Current game state
+ * @returns {GameState} Updated game state
+ */
+function processEvent(eventName, eventData, gameState) {
+  switch(eventName) {
+    case EVENT.ADD_PLAYER:
+      return addPlayer(eventData.name, gameState);
+    case EVENT.REMOVE_PLAYER:
+      return removePlayer(eventData.name, gameState);
+    case EVENT.SET_TARGET:
+      return setTargetLocation(eventData.name, eventData.x, eventData.y, gameState);
+    case EVENT.SEND_CHAT:
+      return sendChatMessage(eventData.name, eventData.message, gameState);
+    case EVENT.SET_DANCE:
+      return setDance(eventData.name, eventData.dance, gameState);
+  }
+}
+
+module.exports = {
+  DANCE,
+  DIR,
+  DIR_TO_SPRITE_MAP,
+  EVENT,
+  CHAT_DISMISS_TIME,
+  MOVE_SPEED,
+  SRC_SPRITE_SIZE,
+  DSP_SPRITE_SIZE,
+  GAME_HEIGHT,
+  GAME_WIDTH,
+  SPRITE_START_X,
+  SPRITE_START_Y,
+  ACTIONS,
+  clamp,
+  clone,
+  isCurrentPlayer,
+  updatePlayerAttrs,
+  addPlayer,
+  removePlayer,
+  setTargetLocation,
+  sendChatMessage,
+  setDance,
+  updatePlayerStates,
+  updatePlayerState,
+  processEvent,
+};
