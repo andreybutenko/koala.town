@@ -38,6 +38,7 @@ const DIR_TO_SPRITE_MAP = {
 /** Events that can be emitted or processed */
 const EVENT = {
   SYNC: 'sync',
+  SET_NUM_VISITORS: 'set num visitors',
   ADD_PLAYER: 'add player',
   REMOVE_PLAYER: 'remove player',
   SET_TARGET: 'set target',

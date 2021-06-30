@@ -35,8 +35,11 @@ window.addEventListener('load', function() {
           eventTypeMesssage, eventData, gameState
         });
         gameState = core.processEvent(eventTypeMesssage, eventData, gameState);
-        console.log('New game state', gameState);
       });
+    });
+
+    socket.on(core.EVENT.SET_NUM_VISITORS, (numVisitors) => {
+      document.getElementById('view-counter').innerText = `You are player number ${numVisitors}!`;
     });
 
     // Setup canvas

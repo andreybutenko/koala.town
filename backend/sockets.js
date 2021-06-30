@@ -6,6 +6,8 @@ let gameState = {
 
 let io = null;
 
+let numVisitors = 0;
+
 function processEvent(eventName, eventData, initiatingPlayerName) {
   if (eventName === core.EVENT.SYNC) {
     return;
@@ -41,6 +43,7 @@ function setupSockets(io_) {
   io.on('connection', (socket) => {
     let connectionName = null;
     socket.emit(core.EVENT.SYNC, gameState);
+    socket.emit(core.EVENT.SET_NUM_VISITORS, numVisitors + 1);
 
     socket.on(core.EVENT.ADD_PLAYER, (eventData) => {
       if (connectionName !== null || !eventData || !eventData.name) {
@@ -58,6 +61,7 @@ function setupSockets(io_) {
         }
       }
 
+      numVisitors += 1;
       connectionName = (nameSuffix === '') ? name : `${name} ${nameSuffix}`;
       processEvent(core.EVENT.ADD_PLAYER, {}, connectionName);
     });
