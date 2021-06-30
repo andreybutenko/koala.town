@@ -6,17 +6,23 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="/core.js"></script>
   <script src="/static/interactions.js"></script>
-  <title>Club Koala</title>
+  <title>Koala Town</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?koalatown">
+  <meta property="og:title" content="Koala Town" />
+  <meta property="og:description" content="Koala Town is a small, fun place for koala lovers to hang out!" />
+  <meta property="og:url" content="https://koala.town/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://koala.town/static/images/koala-town-social.png" />
 </head>
 <body>
   <p id="error" class="game-error hidden">
-    There was an error and you have been disconnected from Club Koala.
+    There was an error and you have been disconnected from Koala Town.
     <a href="">Click here</a> to refresh the page and reconnect.
   </p>
   <div id="chat-menu"></div>
   <main>
     <div class="content-container">
-      <h1>Welcome to Club Koala!</h1>
+      <h1>Welcome to Koala Town!</h1>
       <canvas id="canvas" class="content"></canvas>
       <p id="view-counter" class="subtitle"></p>
     </div>
